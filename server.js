@@ -70,15 +70,14 @@ app.post('/render', async (req, res) => {
           .input(imgPath)
           .inputOptions(['-loop 1'])
           .input(audioPath)
-          .outputOptions([
-            '-c:v libx264',
-            '-tune stillimage',
-            '-c:a aac',
-            '-b:a 192k',
-            '-pix_fmt yuv420p',
-            '-shortest',
-            '-vf', 'scale=1080:1920:force_original_aspect_ratio=increase,crop=1080:1920',
-          ])
+         .outputOptions([
+  '-c:v libx264',
+  '-preset veryfast',
+  '-crf 28',
+  '-pix_fmt yuv420p',
+  '-shortest',
+  '-vf', 'scale=720:1280:force_original_aspect_ratio=increase,crop=720:1280'
+])
           .save(videoPath)
           .on('end', resolve)
           .on('error', reject)
